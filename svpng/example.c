@@ -1,5 +1,5 @@
-#include "svpng.inc"
-
+// #include "svpng.inc"
+#include "my_svpng.h"
 void test_rgb(void) {
     unsigned char rgb[256 * 256 * 3], *p = rgb;
     unsigned x, y;
