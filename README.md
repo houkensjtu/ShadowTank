@@ -6,16 +6,16 @@ C0语言是CMU根据教育需求特别设计的一门语言，其语法特征类
 
 ### 1. 变量类型
 ```C
-int n; // 整数。int默认是4 Byte或者32 bit
-char c; // 字符
-bool b; // 布尔值
+int n;                // 整数。int默认是4 Byte或者32 bit
+char c;               // 字符
+bool b;               // 布尔值
 string str = "Hello"; // 字符串。使用前需要 #use <string>
 
 int[] arr = alloc_array(int , 10); // 数组。必须用alloc_array来分布内存；arr是一个指针
 
-int* p = alloc(int); // 指针变量
+int* p = alloc(int);  // 指针变量
 
-struct Point{ // 结构体
+struct Point{         // 结构体
   int x, y;
 };
 
