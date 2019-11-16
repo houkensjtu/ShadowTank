@@ -1,0 +1,58 @@
+/* Assumes that pixel is already defined to be an int (pixel.c0) */
+/* typedef int pixel; */
+
+#use <util>
+#use <string>
+#use <conio>
+
+int result_width(int width, int height)
+{
+  return width;
+}
+
+int result_height(int width, int height)
+{
+  return height;
+}
+
+int tank_alpha(int r1, int r2)
+{
+  int a = 255 - abs(r1 - r2);
+  if (a == 0) a = 1;
+  if (a > 255) a = 255;
+  return a;
+}
+
+pixel[] manipulate (pixel[] W, pixel[] B, int width, int height)
+//@requires width > 0 && height > 0 && width <= int_max() / height;
+//@requires \length(W) == width*height;
+//@requires \length(B) == width*height;
+//@ensures \length(\result) == \length(W);
+//@ensures \length(\result) == \length(B);
+{
+  pixel[] A = alloc_array(pixel, width*height);
+
+  for (int j = 0; j < height; j++)
+    //@loop_invariant 0 <= j;
+    {
+      for (int i = 0; i < width; i++)
+        //@loop_invariant 0 <= i;
+        {
+          //@assert 0 <= j && j < height && 0 <= i && i < width;
+          int index = get_index(j, i, width, height);
+          
+          /* Below is my version used pixel interface. */
+          int r1 = get_red(W[index]) * 7/ 10;
+          int r2 = get_red(B[index]) * 3/10;
+          
+          //int a = get_alpha(W[index]);
+          int a = tank_alpha(r1, r2);
+          int r = r2/a;
+          //printint(a);println("");
+          A[index] = make_pixel(a, r2, r2, r2);
+
+        }
+    }
+
+  return A;
+}
